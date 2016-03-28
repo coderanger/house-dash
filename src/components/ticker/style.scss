@@ -1,0 +1,13 @@
+@import "../helpers/helpers.scss";
+
+:local .ticker {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: vh(80px);
+  background-color: #000;
+  color: #FFF;
+  font-size: vh(48px);
+  line-height: vh(80px);
+}

@@ -1,0 +1,10 @@
+$abstract-vw: 1920px;
+$abstract-vh: 1200px;
+
+@function vw($px) {
+  @return ($px / $abstract-vw) * 100.0vw;
+}
+
+@function vh($px) {
+  @return ($px / $abstract-vh) * 100.0vh;
+}

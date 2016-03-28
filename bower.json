@@ -1,0 +1,21 @@
+{
+  "name": "house-dash",
+  "version": "1.0.0",
+  "authors": [
+    "Noah Kantrowitz <noah@coderanger.net>"
+  ],
+  "license": "Apache 2",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "font-awesome": "~4.5.0",
+    "weather-icons": "~2.0.10",
+    "normalize-css": "normalize.css#^3.0.3"
+  }
+}

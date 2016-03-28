@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/weather-icons.css" type="text/css">
+    <link rel="stylesheet" href="/css/main.css" type="text/css">
+  </head>
+  <body>
+    <div id="grid">
+      <table>
+        <colgroup><col class="grid-col"></col><col class="grid-col"></col><col class="grid-col"></col><col class="grid-col"></col><col class="grid-col"></col><col class="grid-col"></col></colgroup>
+        <tr class="grid-row">
+          <td class="widget" id="bart" rowspan=2 colspan=2>
+            <div class="widget-background">&nbsp;</div>
+          </td>
+          <td class="widget" id="moon">
+            <div class="widget-background">
+              <i class="wi wi-moon-alt-waxing-crescent-3"></i>
+            </div>
+          </td>
+          <td class="widget" id="weather-sf">
+            <div class="widget-background">
+              <div class="widget-weather">
+                <table>
+                  <tr>
+                    <td class="widget-weather-left">
+                      <div class="widget-weather-forecast"><i class="wi wi-cloudy"></i></div>
+                      <div class="widget-weather-temp">
+                        <span class="widget-weather-high">63<i class="wi wi-degrees"></i></span>
+                        /
+                        <span class="widget-weather-low">52<i class="wi wi-degrees"></i></span>
+                    </td>
+                    <td class="widget-weather-location"><i class="fa fa-building-o"></i></td>
+                  </tr>
+                  <tr>
+                    <td>61<i class="wi wi-degrees"></i></td>
+                    <td>54<i class="wi wi-humidity"></i></td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </td>
+          <td class="widget" id="weather-home">
+            <div class="widget-background">
+              <div class="widget-weather">
+                <table>
+                  <tr>
+                    <td class="widget-weather-left">
+                      <div class="widget-weather-forecast"><i class="wi wi-rain-mix"></i></div>
+                      <div class="widget-weather-temp">
+                        <span class="widget-weather-high">67<i class="wi wi-degrees"></i></span>
+                        /
+                        <span class="widget-weather-low">55<i class="wi wi-degrees"></i></span>
+                    </td>
+                    <td class="widget-weather-location"><i class="fa fa-home"></i></td>
+                  </tr>
+                  <tr>
+                    <td>63<i class="wi wi-degrees"></i></td>
+                    <td>59<i class="wi wi-humidity"></i></td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </td>
+          <td class="widget" id="clock">
+            <div class="widget-background">&nbsp;</div>
+          </td>
+        </tr>
+        <tr class="grid-row">
+        </tr>
+        <tr class="grid-row">
+          <td class="widget" id="calendar" rowspan=2 colspan=2>
+            <div class="widget-background">&nbsp;</div>
+          </td>
+          <td class="widget" id="gif" rowspan=2 colspan=2>
+            <div class="widget-background">&nbsp;</div>
+          </td>
+        </tr>
+        <tr class="grid-row">
+        </tr>
+      </table>
+    </div>
+    <div id="news">
+      <marquee scrolldelay=60 scrollamount=5><%= @bbc.items.map(&:title).join(' | ') %></marquee>
+    </div>
+  </body>
+</html>
