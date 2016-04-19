@@ -1,16 +1,16 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { bartFetch } from '../../actions';
+// import { bartFetch } from '../../actions';
 
-class BartWidget extends Component {
+class GifWidget extends Component {
   componentDidMount() {
     const { dispatch } = this.props
-    dispatch(bartFetch());
+    // dispatch(bartFetch());
   }
 
   render() {
     const { isFetching, etd } = this.props;
-    let content = isFetching ?
+    let content = true ?
       <i className="fa fa-spinner fa-spin"></i> :
       <p></p>;
     return (
@@ -23,11 +23,11 @@ class BartWidget extends Component {
   }
 }
 
-BartWidget.propTypes = {
-  isFetching: PropTypes.bool.isRequired,
-  etd: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
+GifWidget.propTypes = {
+  // isFetching: PropTypes.bool.isRequired,
+  // etd: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
 }
 
-BartWidget = connect(state => state.bart)(BartWidget)
+GifWidget = connect(state => ({}))(GifWidget)
 
-export default BartWidget
+export default GifWidget

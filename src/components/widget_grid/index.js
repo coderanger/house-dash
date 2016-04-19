@@ -11,29 +11,27 @@ const WidgetGrid = ({news}) => {
   return (
     <div className={styles.grid}>
       <table>
-        <colgroup><col class="grid-col"></col><col class="grid-col"></col><col class="grid-col"></col><col class="grid-col"></col><col class="grid-col"></col><col class="grid-col"></col></colgroup>
-        <tr class="grid-row">
-          <BartWidget data={data.bart} />
-          <MoonWidget data={data.moon} />
-          <WeatherWidget data={data.city_weather} location="city" />
-          <WeatherWidget data={data.home_weather} location="home" />
-          <ClockWidget data={data.clock} />
-        </tr>
-        <tr class="grid-row">
-        </tr>
-        <tr class="grid-row">
-          <CalendarWidget data={data.calendar} />
-          <GifWdiget data={data.gif} />
-        </tr>
-        <tr class="grid-row">
-        </tr>
+        <colgroup><col className={styles.gridCol}></col><col className={styles.gridCol}></col><col className={styles.gridCol}></col><col className={styles.gridCol}></col><col className={styles.gridCol}></col><col className={styles.gridCol}></col></colgroup>
+        <tbody>
+          <tr className={styles.gridRow}>
+            <BartWidget/>
+            <MoonWidget/>
+            <WeatherWidget location="sf" />
+            <WeatherWidget location="home" />
+            <ClockWidget/>
+          </tr>
+          <tr className={styles.gridRow}>
+          </tr>
+          <tr className={styles.gridRow}>
+            <CalendarWidget/>
+            <GifWidget/>
+          </tr>
+          <tr className={styles.gridRow}>
+          </tr>
+        </tbody>
       </table>
     </div>
   )
-}
-
-WidgetGrid.propTypes = {
-  data: PropTypes.object.isRequired,
 }
 
 export default WidgetGrid

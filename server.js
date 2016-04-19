@@ -19,14 +19,51 @@ app.get('/', (req, res) => {
   res.send('<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Document</title></head><body><div id="root"></div><script src="/assets/app.js"></script></body></html>');
 });
 
-import { parseURL } from 'rss-parser';
+import rssParser from 'rss-parser';
 app.get('/_api/news', (req, res) => {
-  parseURL('http://feeds.bbci.co.uk/news/rss.xml?edition=uk', (err, parsed) => {
+  rssParser.parseURL('https://feeds.bbci.co.uk/news/rss.xml?edition=us', (err, parsed) => {
     if(err)
       res.status(500).send(err.toString())
     else
       res.send(parsed)
   });
+});
+
+import xml2js from 'xml2js';
+app.get('/_api/bart', (req, res) => {
+  function bartApiCall(url) {
+    return fetch(url).then(r => r.text()).then(text => new Promise((resolve, reject) => {
+      let parser = new xml2js.Parser();
+      parser.parseString(text, (err, result) => {
+        if(err)
+          reject(err)
+        else
+          resolve(result)
+      });
+    }));
+  }
+  let calls = [
+    bartApiCall('http://api.bart.gov/api/etd.aspx?cmd=etd&orig=LAFY&dir=s&key='+process.env.BART_API_KEY),
+    bartApiCall('http://api.bart.gov/api/bsa.aspx?cmd=bsa&key='+process.env.BART_API_KEY),
+    fetch('http://www.bart.gov/bart/api/ets/status').then(r => r.json()),
+  ];
+  Promise.all(calls)
+    .then(([etd, bsa, ets]) => res.send({etd: etd, bsa: bsa, ets: ets}))
+    .catch(err => res.status(500).send(err.toString()));
+});
+
+app.get('/_api/weather/home', (req, res) => {
+  fetch(`https://api.forecast.io/forecast/${process.env.FORECASTIO_API_KEY}/37.8922381722366,-122.12288780183`)
+    .then(r => r.json())
+    .then(json => res.send(json))
+    .catch(err => res.status(500).send(err.toString()));
+});
+
+app.get('/_api/weather/sf', (req, res) => {
+  fetch(`https://api.forecast.io/forecast/${process.env.FORECASTIO_API_KEY}/37.7868693336672,-122.399941811198`)
+    .then(r => r.json())
+    .then(json => res.send(json))
+    .catch(err => res.status(500).send(err.toString()));
 });
 
 app.listen(3000, () => {
