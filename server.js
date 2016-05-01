@@ -13,7 +13,9 @@ app.use(webpackMiddleware(webpackCompiler, {
   noInfo: true,
   publicPath: webpackConfig.output.publicPath,
 }));
-app.use(webpackHotMiddleware(webpackCompiler));
+if(process.env.NODE_ENV != 'prod') {
+  app.use(webpackHotMiddleware(webpackCompiler));
+}
 
 app.get('/', (req, res) => {
   res.send('<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Document</title></head><body><div id="root"></div><script src="/assets/app.js"></script></body></html>');
