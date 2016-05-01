@@ -18,6 +18,10 @@
   font-size: vh(140px);
 }
 
+:local .nextSoon {
+  color: red;
+}
+
 :local .upcoming {
   position: absolute;
   top: calc(40px + #{vh(140px)});
