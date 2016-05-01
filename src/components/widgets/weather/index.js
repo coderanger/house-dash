@@ -18,9 +18,24 @@ const ICON_MAPPING = {
 }
 
 class WeatherWidget extends BaseWidget {
-  componentDidMount() {
+
+  constructor(props) {
+    super(props);
+    this.updateWeather = this.updateWeather.bind(this);
+  }
+
+  updateWeather() {
     const { location, dispatch } = this.props
     dispatch(weatherFetch(location));
+  }
+
+  componentDidMount() {
+    this.updateWeatherInterval = setInterval(this.updateWeather, 1000*60*60);
+    this.updateWeather();
+  }
+
+  componentWillUnmount() {
+    if(this.updateWeatherInterval) clearInterval(this.updateWeatherInterval);
   }
 
   widgetContent() {
