@@ -1,40 +1,36 @@
 @import "../../helpers/helpers.scss";
 
-:local .widgetWeather {
+:local .widget {
   width: 100%;
   height: 100%;
   padding: vh(16px) vw(16px);
   box-sizing: border-box;
-  // font-size: vh(64px);
-  font-size: vh(32px);
+  font-size: vh(50px);
 }
 
-:local .widgetWeather table {
+:local .widget table {
   width: 100%;
   height: 100%;
 }
 
-:local .widgetWeather tr {
+:local .widget tr {
   height: 50%;
   vertical-align: middle;
 }
 
-:local .widgetWeather td {
+:local .widget td {
   width: 50%;
   text-align: center;
 }
 
-:local .widgetWeatherLocation {
-  font-size: vh(100px);
+:local .location {
+  font-size: vh(120px);
 }
 
-:local .widgetWeatherTemp {
+:local .high, :local .low {
   font-size: vh(30px);
 }
 
-:local .widgetWeatherHigh {
-}
-
-:local .widgetWeatherLow {
+:local .low {
   color: #4A4A4A;
 }

@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import BartWidget from '../widgets/bart';
 import MoonWidget from '../widgets/moon';
 import WeatherWidget from '../widgets/weather';
-// import ClockWidget from '../clock_widget';
+import ClockWidget from '../widgets/clock';
 // import CalendarWidget from '../calendar_widget';
 // import GifWidget from '../gif_widget';
 import DummyWidget from '../widgets/dummy';
@@ -16,7 +16,7 @@ const WidgetGrid = ({news}) => {
         <MoonWidget/>
         <WeatherWidget location="sf"/>
         <WeatherWidget location="home"/>
-        <DummyWidget/>
+        <ClockWidget/>
       </div>
       <div className={styles.gridRow}>
         <DummyWidget rows="2" cols="2"/>

@@ -1,0 +1,14 @@
+:local .clock {
+  font-weight: bold;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  $fontSize: "(3.24vw + 5.184vh)";
+  font-size: calc((#{$fontSize}) / 2);
+  margin-top: calc(#{$fontSize} / -2);
+
+  > div {
+    height: calc((#{$fontSize}) / 2);
+  }
+}

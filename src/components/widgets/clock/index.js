@@ -1,33 +1,38 @@
-import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
-// import { bartFetch } from '../../actions';
+import React from 'react';
+import moment from 'moment';
 
-class ClockWidget extends Component {
-  componentDidMount() {
-    const { dispatch } = this.props
-    // dispatch(bartFetch());
+import BaseWidget from '../base';
+
+class ClockWidget extends BaseWidget {
+  constructor(props) {
+    super(props);
+    this.state = {};
+    this.updateClock = this.updateClock.bind(this);
   }
 
-  render() {
-    const { isFetching, etd } = this.props;
-    let content = true ?
-      <i className="fa fa-spinner fa-spin"></i> :
-      <p></p>;
+  updateClock() {
+    this.setState({time: moment()});
+  }
+
+  componentDidMount() {
+    this.updateClockInterval = setInterval(this.updateClock, 1000);
+    this.updateClock();
+  }
+
+  componentWillUnmount() {
+    if(this.updateClockInterval) clearInterval(this.updateClockInterval);
+  }
+
+  widgetContent() {
+    const { time } = this.state;
+    const styles = require('./style.scss');
     return (
-      <td className="widget">
-        <div className="widget-background">
-          {content}
-        </div>
-      </td>
+      <div className={styles.clock}>
+        <div>{time ? time.format('MMM D') : ''}</div>
+        <div>{time ? time.format('hh:mm') : ''}</div>
+      </div>
     )
   }
 }
-
-ClockWidget.propTypes = {
-  // isFetching: PropTypes.bool.isRequired,
-  // etd: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
-}
-
-ClockWidget = connect(state => ({}))(ClockWidget)
 
 export default ClockWidget
