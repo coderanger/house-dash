@@ -1,0 +1,41 @@
+:local .widget {
+  padding: 10px;
+  text-align: center;
+  box-sizing: border-box;
+  display: inline-block;
+  vertical-align: top;
+}
+
+:local .widgetRows1 {
+  height: 50%;
+}
+
+:local .widgetRows2 {
+  height: 100%;
+}
+
+:local .widgetCols1 {
+  width: 16.66%;
+}
+
+:local .widgetCols2 {
+  width: 16.66% * 2;
+}
+
+:local .widgetBackground {
+  width: 100%;
+  height: 100%;
+  background-color: #9B9B9B;
+  border-radius: 32px;
+  position: relative;
+}
+
+:local .widgetSpinner {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  $fontSize: "(6.25vw + 10vh)";
+  font-size: calc(#{$fontSize} / 2);
+  margin-top: calc(#{$fontSize} / -4);
+}

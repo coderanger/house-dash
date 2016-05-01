@@ -9,39 +9,6 @@
   padding: 10px;
 }
 
-:local .grid > table {
-  height: 100%;
-  width: 100%;
-}
-
 :local .gridRow {
-  height: 25%;
-}
-
-:local .gridCol {
-  width: 16.66%;
-}
-
-.widget {
-  padding: 10px;
-  text-align: center;
-  box-sizing: border-box;
-}
-
-.widget-background {
-  width: 100%;
-  height: calc(100% - 10px);
-  // height: 100px;
-  background-color: #9B9B9B;
-  border-radius: 32px;
-  position: relative;
-}
-
-.widget .fa-spinner {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
-  font-size: calc((12.5vw + 20vh) / 2);
-  margin-top: calc((12.5vw + 20vh) / -4);
+  height: 50%;
 }

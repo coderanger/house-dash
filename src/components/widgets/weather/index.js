@@ -1,18 +1,18 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { weatherFetch } from '../../actions';
 
-class WeatherWidget extends Component {
+import BaseWidget from '../base';
+import { weatherFetch } from '../../../actions';
+
+class WeatherWidget extends BaseWidget {
   componentDidMount() {
     const { location, dispatch } = this.props
     dispatch(weatherFetch(location));
   }
 
-  render() {
-    const { isFetching, location } = this.props;
+  widgetContent() {
     const styles = require('./style.scss');
-    let content = isFetching ?
-      <i className="fa fa-spinner fa-spin"></i> :
+    return (
       <div className={styles.widgetWeather}>
         <table>
           <tbody>
@@ -33,14 +33,8 @@ class WeatherWidget extends Component {
             </tr>
           </tbody>
         </table>
-      </div>;
-    return (
-      <td className="widget">
-        <div className="widget-background">
-          {content}
-        </div>
-      </td>
-    )
+      </div>
+    );
   }
 }
 
