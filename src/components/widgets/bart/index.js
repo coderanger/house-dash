@@ -43,7 +43,7 @@ class BartWidget extends BaseWidget {
         <i className={'fa fa-train '+styles.icon}></i>
         <div className={styles.next}>{etdNext !== undefined ? (etdNext + 'm') : 'N/A'}</div>
         <div className={styles.upcoming}>
-          {etdMinutes.map(e => <div>{e}m</div>)}
+          {etdMinutes.slice(0, 3).map(e => <div>{e}m</div>)}
         </div>
       </div>
     )
