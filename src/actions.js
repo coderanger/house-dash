@@ -77,3 +77,28 @@ export function weatherFetch(location) {
       .then(json => dispatch(weatherFetched(location, json)))
   };
 }
+
+// GIFs
+export const GIF_FETCH = 'GIF_FETCH';
+export const GIF_FETCHED = 'GIF_FETCHED';
+
+export function gifFetched(json) {
+  return {
+    type: GIF_FETCHED,
+    images: json.images.filter(img => {
+      if(img.gifv) return false;
+      const aspect = img.width / img.height;
+      if(aspect > 1.5 || aspect < 0.5) return false;
+      return true;
+    }),
+  };
+}
+
+export function gifFetch() {
+  return (dispatch) => {
+    dispatch({type: GIF_FETCH});
+    fetch('/_api/gif')
+      .then(res => res.json())
+      .then(json => dispatch(gifFetched(json)))
+  };
+}

@@ -1,0 +1,20 @@
+:local .gif {
+  height: 100%;
+  width: 100%;
+
+  img {
+    display: inline-block;
+    max-width: calc(100% - 30px);
+    max-height: calc(100% - 30px);
+    width: auto;
+    height: auto;
+    vertical-align: middle;
+  }
+
+  &:before {
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%;
+  }
+}

@@ -4,7 +4,7 @@ import MoonWidget from '../widgets/moon';
 import WeatherWidget from '../widgets/weather';
 import ClockWidget from '../widgets/clock';
 // import CalendarWidget from '../calendar_widget';
-// import GifWidget from '../gif_widget';
+import GifWidget from '../widgets/gif';
 import DummyWidget from '../widgets/dummy';
 
 const WidgetGrid = ({news}) => {
@@ -20,7 +20,7 @@ const WidgetGrid = ({news}) => {
       </div>
       <div className={styles.gridRow}>
         <DummyWidget rows="2" cols="2"/>
-        <DummyWidget rows="2" cols="2"/>
+        <GifWidget rows="2" cols="2"/>
       </div>
     </div>
   )

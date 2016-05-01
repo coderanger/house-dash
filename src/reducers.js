@@ -70,10 +70,28 @@ function weatherInternal(location) {
 
 const weather = combineReducers({sf: weatherInternal('sf'), home: weatherInternal('home')});
 
+function gif(state = {isFetching: true, images: []}, action) {
+  switch(action.type) {
+    case actions.GIF_FETCH:
+      return Object.assign({}, state, {
+        isFetching: true,
+        images: [],
+      })
+    case actions.GIF_FETCHED:
+      return Object.assign({}, state, {
+        isFetching: false,
+        images: action.images,
+      })
+    default:
+      return state;
+  }
+}
+
 const rootReducer = combineReducers({
   news,
   bart,
   weather,
+  gif,
 })
 
 export default rootReducer
