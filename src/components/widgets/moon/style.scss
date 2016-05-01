@@ -1,0 +1,9 @@
+:local .moonIcon {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  $fontSize: "(7.5vw + 12vh)";
+  font-size: calc(#{$fontSize} / 2);
+  margin-top: calc(#{$fontSize} / -4);
+}

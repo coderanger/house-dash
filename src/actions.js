@@ -28,6 +28,8 @@ export function bartFetched(json) {
   return {
     type: BART_FETCHED,
     etd: json.etd.root.station[0].etd ? json.etd.root.station[0].etd.map(etd => moment(json.etd.root.date[0]+' '+json.etd.root.time[0]).add(etd.estimate[0].minutes[0], 'minutes')) : [],
+    advisory: json.bsa.root.bsa[0].description[0],
+    escalators: json.ets.escalators.escalator,
   };
 }
 
@@ -48,7 +50,11 @@ export function weatherFetched(location, json) {
   return {
     type: WEATHER_FETCHED,
     location: location,
-    // etd: json.etd.root.station[0].etd ? json.etd.root.station[0].etd.map(etd => moment(json.etd.root.date[0]+' '+json.etd.root.time[0]).add(etd.estimate[0].minutes[0], 'minutes')) : [],
+    temperature: json.currently.apparentTemperature,
+    humidity: json.currently.humidity,
+    high: json.daily.data[0].apparentTemperatureMax,
+    low: json.daily.data[0].apparentTemperatureMin,
+    icon: json.daily.data[0].icon,
   };
 }
 

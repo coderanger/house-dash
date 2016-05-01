@@ -11,6 +11,7 @@ class WeatherWidget extends BaseWidget {
   }
 
   widgetContent() {
+    const { temperature, humidity, high, low, icon, location } = this.props;
     const styles = require('./style.scss');
     return (
       <div className={styles.widgetWeather}>
@@ -20,16 +21,16 @@ class WeatherWidget extends BaseWidget {
               <td>
                 <div className="widget-weather-forecast"><i className="wi wi-cloudy"></i></div>
                 <div className="widget-weather-temp">
-                  <span className={styles.widgetWeatherHigh}>63<i className="wi wi-degrees"></i></span>
+                  <span className={styles.widgetWeatherHigh}>{Math.round(high)}<i className="wi wi-degrees"></i></span>
                   {'/'}
-                  <span className={styles.widgetWeatherLow}>52<i className="wi wi-degrees"></i></span>
+                  <span className={styles.widgetWeatherLow}>{Math.round(low)}<i className="wi wi-degrees"></i></span>
                 </div>
               </td>
-              <td className={styles.widgetWeatherLocation}><i className="fa fa-building-o"></i></td>
+              <td className={styles.widgetWeatherLocation}><i className={'fa ' + {home: 'fa-home', sf: 'fa-building-o'}[location]}></i></td>
             </tr>
             <tr>
-              <td>61<i className="wi wi-degrees"></i></td>
-              <td>54<i className="wi wi-humidity"></i></td>
+              <td>{Math.round(temperature)}<i className="wi wi-degrees"></i></td>
+              <td>{Math.round(humidity * 100.0)}<i className="wi wi-humidity"></i></td>
             </tr>
           </tbody>
         </table>
@@ -41,7 +42,6 @@ class WeatherWidget extends BaseWidget {
 WeatherWidget.propTypes = {
   isFetching: PropTypes.bool.isRequired,
   location: PropTypes.string.isRequired,
-  // etd: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
 }
 
 WeatherWidget = connect((state, props) => state.weather[props.location])(WeatherWidget)

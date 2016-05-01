@@ -18,17 +18,21 @@ function news(state = {isFetching: true, items: []}, action) {
   }
 }
 
-function bart(state = {isFetching: true, etd: []}, action) {
+function bart(state = {isFetching: true, etd: [], advisory: null, escalators: []}, action) {
   switch(action.type) {
     case actions.BART_FETCH:
       return Object.assign({}, state, {
         isFetching: true,
         etd: [],
+        advisory: null,
+        escalators: []
       })
     case actions.BART_FETCHED:
       return Object.assign({}, state, {
         isFetching: false,
         etd: action.etd,
+        advisory: action.advisory,
+        escalators: action.escalators,
       })
     default:
       return state;
@@ -42,13 +46,21 @@ function weatherInternal(location) {
         if(location != action.location) return state;
         return Object.assign({}, state, {
           isFetching: true,
-          // etd: [],
+          temperature: null,
+          humidity: null,
+          high: null,
+          low: null,
+          icon: null,
         })
       case actions.WEATHER_FETCHED:
         if(location != action.location) return state;
         return Object.assign({}, state, {
           isFetching: false,
-          // etd: action.etd,
+          temperature: action.temperature,
+          humidity: action.humidity,
+          high: action.high,
+          low: action.low,
+          icon: action.icon,
         })
       default:
         return state;

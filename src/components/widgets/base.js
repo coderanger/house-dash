@@ -3,10 +3,6 @@ import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 
 class BaseWidget extends Component {
-  getDefaultProps() {
-    return {rows: 1, cols: 1};
-  }
-
   render() {
     const { rows, cols, isFetching } = this.props;
     const styles = require('./style.scss');
@@ -30,6 +26,12 @@ class BaseWidget extends Component {
 BaseWidget.propTypes = {
   rows: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   cols: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  isFetching: PropTypes.bool,
+}
+
+BaseWidget.defaultProps = {
+  rows: 1,
+  cols: 1,
 }
 
 export default BaseWidget
