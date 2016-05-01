@@ -1,0 +1,27 @@
+@import "../../helpers/helpers.scss";
+
+:local .widget {
+
+}
+
+:local .icon {
+  position: absolute;
+  right: 30px;
+  top: 30px;
+  font-size: vh(140px);
+}
+
+:local .next {
+  position: absolute;
+  left: 30px;
+  top: 30px;
+  font-size: vh(140px);
+}
+
+:local .upcoming {
+  position: absolute;
+  top: calc(40px + #{vh(140px)});
+  bottom: 30px;
+  left: 30px;
+  font-size: vh(80px);
+}

@@ -1,19 +1,51 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import moment from 'moment';
 
 import BaseWidget from '../base';
 import { bartFetch } from '../../../actions';
 
 class BartWidget extends BaseWidget {
-  componentDidMount() {
+  constructor(props) {
+    super(props);
+    this.updateBart = this.updateBart.bind(this);
+    this.updateBartDisplay = this.updateBartDisplay.bind(this);
+  }
+
+  updateBart() {
     const { dispatch } = this.props
     dispatch(bartFetch());
   }
 
+  updateBartDisplay() {
+    this.forceUpdate();
+  }
+
+  componentDidMount() {
+    this.updateBartInterval = setInterval(this.updateBart, 1000*60*10);
+    this.updateBartDisplayInterval = setInterval(this.updateBartDisplay, 1000);
+    this.updateBart();
+  }
+
+  componentWillUnmount() {
+    if(this.updateBartInterval) clearInterval(this.updateBartInterval);
+    if(this.updateBartDisplayInterval) clearInterval(this.updateBartDisplayInterval);
+  }
+
   widgetContent() {
     const { etd, advisory, escalators } = this.props;
+    const styles = require('./style.scss');
+    let now = moment();
+    let etdMinutes = etd.map(e => moment(e).diff(now, 'minute') - 5).filter(e => e >= 0);
+    let etdNext = etdMinutes.shift();
     return (
-      <div></div>
+      <div className={styles.widget}>
+        <i className={'fa fa-train '+styles.icon}></i>
+        <div className={styles.next}>{etdNext !== undefined ? (etdNext + 'm') : 'N/A'}</div>
+        <div className={styles.upcoming}>
+          {etdMinutes.map(e => <div>{e}m</div>)}
+        </div>
+      </div>
     )
   }
 }

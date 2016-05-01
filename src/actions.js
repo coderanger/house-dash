@@ -25,9 +25,20 @@ export const BART_FETCH = 'BART_FETCH';
 export const BART_FETCHED = 'BART_FETCHED';
 
 export function bartFetched(json) {
+  // Parse a string like "04/30/2016 10:25:33 PM PDT".
+  const etdBase = moment(json.etd.root.date[0]+' '+json.etd.root.time[0], 'MM/DD/YYY hh:mm:ss a');
+  let etd = [];
+  if(json.etd.root.station[0].etd) {
+    json.etd.root.station[0].etd.forEach(dest => {
+      dest.estimate.forEach(est => {
+        etd.push(etdBase.clone().add(parseInt(est.minutes[0], 10), 'minutes').toString())
+      })
+    })
+  }
+  etd.sort();
   return {
     type: BART_FETCHED,
-    etd: json.etd.root.station[0].etd ? json.etd.root.station[0].etd.map(etd => moment(json.etd.root.date[0]+' '+json.etd.root.time[0]).add(etd.estimate[0].minutes[0], 'minutes')) : [],
+    etd: etd,
     advisory: json.bsa.root.bsa[0].description[0],
     escalators: json.ets.escalators.escalator,
   };
