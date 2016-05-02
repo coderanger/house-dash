@@ -13,7 +13,7 @@ class Ticker extends Component {
     const styles = require('./style.scss');
     let content = isFetching ?
       <div className={styles.loading}><i className="fa fa-spinner fa-spin"></i></div> :
-      <marquee scrolldelay="60" scrollamount="5">{items.map(it => it + ' | ')}</marquee>;
+      <div className={styles.wrap}><div className={styles.inner}>{items.map(it => it + ' | ')}{items.map(it => it + ' | ')}</div></div>;
     return (
       <div className={styles.ticker}>
         {content}

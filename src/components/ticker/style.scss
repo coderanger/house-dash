@@ -12,6 +12,32 @@
   line-height: vh(80px);
 }
 
+:local .wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+:local .inner {
+  white-space: nowrap;
+  overflow: hidden;
+  position: absolute;
+  animation-duration: 100s;
+  animation-name: ticker;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes :local(ticker) {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
 :local .loading {
   text-align: center;
 }
