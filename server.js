@@ -69,11 +69,12 @@ app.get('/_api/weather/sf', (req, res) => {
 });
 
 app.get('/_api/gif', (req, res) => {
-  fetch('https://api.imgur.com/3/account/coderanger/gallery_favorites', {headers: {Authorization: `Client-ID ${process.env.IMGUR_CLIENT_ID}`}})
+  let imgurFetch = (url) => fetch(`https://api.imgur.com/3${url}`, {headers: {Authorization: `Client-ID ${process.env.IMGUR_CLIENT_ID}`}});
+  let fetchFavs = (page) => imgurFetch(`/account/coderanger/gallery_favorites/${page}`)
     .then(r => r.json())
     .then(json => Promise.all(json.data.map(fav => {
       if(fav.is_album) {
-        return fetch(`https://api.imgur.com/3/gallery/album/${fav.id}`, {headers: {Authorization: `Client-ID ${process.env.IMGUR_CLIENT_ID}`}})
+        return imgurFetch(`/gallery/album/${fav.id}`)
           .then(r => r.json())
           .then(json => json.data.images)
           .catch([]); // Ignore errors on the album fetches.
@@ -81,6 +82,9 @@ app.get('/_api/gif', (req, res) => {
         return [fav];
       }
     })))
+    .then(images => Array.prototype.concat.call(...images))
+
+  Promise.all([fetchFavs(0), fetchFavs(1), fetchFavs(2)])
     .then(images => res.send({images: Array.prototype.concat.call(...images)}))
     .catch(err => res.status(500).send(err.toString()));
 });
