@@ -17,4 +17,5 @@
 name 'house-dash'
 
 depends 'application'
+depends 'application_git'
 depends 'application_javascript'
