@@ -26,7 +26,7 @@ export const BART_FETCHED = 'BART_FETCHED';
 
 export function bartFetched(json) {
   // Parse a string like "04/30/2016 10:25:33 PM PDT".
-  const etdBase = moment(json.etd.root.date[0]+' '+json.etd.root.time[0], 'MM/DD/YYY hh:mm:ss a');
+  const etdBase = moment(json.etd.root.date[0]+' '+json.etd.root.time[0], 'MM/DD/YYYY hh:mm:ss a');
   let etd = [];
   if(json.etd.root.station[0].etd) {
     json.etd.root.station[0].etd.forEach(dest => {
