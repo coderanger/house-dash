@@ -36,7 +36,7 @@ class BartWidget extends BaseWidget {
     const { etd, advisory, escalators } = this.props;
     const styles = require('./style.scss');
     let now = moment();
-    let etdMinutes = etd.map(e => moment(e).diff(now, 'minute') - 5).filter(e => e >= 0);
+    let etdMinutes = etd.map(e => moment(e).diff(now, 'minutes') - 5).filter(e => e >= 0);
     let etdNext = etdMinutes.shift();
     return (
       <div className={styles.widget}>
@@ -51,7 +51,7 @@ class BartWidget extends BaseWidget {
 }
 
 BartWidget.propTypes = Object.assign({
-  etd: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
+  etd: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   advisory: PropTypes.string,
   escalators: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
 }, BaseWidget.propTypes)

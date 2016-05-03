@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from 'moment';
+import 'moment-timezone';
 
 import BaseWidget from '../base';
 
@@ -11,7 +12,7 @@ class ClockWidget extends BaseWidget {
   }
 
   updateClock() {
-    this.setState({time: moment()});
+    this.setState({time: moment().tz('Americal/Los_Angeles')});
   }
 
   componentDidMount() {

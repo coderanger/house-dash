@@ -14,7 +14,7 @@ export function newsFetched(json) {
 export function newsFetch() {
   return (dispatch) => {
     dispatch({type: NEWS_FETCH});
-    fetch('/_api/news')
+    fetch('/_api/news', {cache: 'no-store'})
       .then(res => res.json())
       .then(json => dispatch(newsFetched(json)))
   };
@@ -26,12 +26,12 @@ export const BART_FETCHED = 'BART_FETCHED';
 
 export function bartFetched(json) {
   // Parse a string like "04/30/2016 10:25:33 PM PDT".
-  const etdBase = moment(json.etd.root.date[0]+' '+json.etd.root.time[0], 'MM/DD/YYY hh:mm:ss a');
+  const etdBase = moment(json.etd.root.date[0]+' '+json.etd.root.time[0], 'MM/DD/YYYY hh:mm:ss a');
   let etd = [];
   if(json.etd.root.station[0].etd) {
     json.etd.root.station[0].etd.forEach(dest => {
       dest.estimate.forEach(est => {
-        etd.push(etdBase.clone().add(parseInt(est.minutes[0], 10), 'minutes').toString())
+        etd.push(etdBase.clone().add(parseInt(est.minutes[0], 10), 'minutes').toISOString())
       })
     })
   }
@@ -47,7 +47,7 @@ export function bartFetched(json) {
 export function bartFetch() {
   return (dispatch) => {
     dispatch({type: BART_FETCH});
-    fetch('/_api/bart')
+    fetch('/_api/bart', {cache: 'no-store'})
       .then(res => res.json())
       .then(json => dispatch(bartFetched(json)))
   };
@@ -72,7 +72,7 @@ export function weatherFetched(location, json) {
 export function weatherFetch(location) {
   return (dispatch) => {
     dispatch({type: WEATHER_FETCH, location: location});
-    fetch('/_api/weather/'+location)
+    fetch('/_api/weather/'+location, {cache: 'no-store'})
       .then(res => res.json())
       .then(json => dispatch(weatherFetched(location, json)))
   };
@@ -97,7 +97,7 @@ export function gifFetched(json) {
 export function gifFetch() {
   return (dispatch) => {
     dispatch({type: GIF_FETCH});
-    fetch('/_api/gif')
+    fetch('/_api/gif', {cache: 'no-store'})
       .then(res => res.json())
       .then(json => dispatch(gifFetched(json)))
   };
