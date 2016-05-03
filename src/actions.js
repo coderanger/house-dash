@@ -31,7 +31,7 @@ export function bartFetched(json) {
   if(json.etd.root.station[0].etd) {
     json.etd.root.station[0].etd.forEach(dest => {
       dest.estimate.forEach(est => {
-        etd.push(etdBase.clone().add(parseInt(est.minutes[0], 10), 'minutes').toString())
+        etd.push(etdBase.clone().add(parseInt(est.minutes[0], 10), 'minutes').toISOString())
       })
     })
   }
