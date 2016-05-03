@@ -3,9 +3,23 @@ import { connect } from 'react-redux';
 import { newsFetch } from '../../actions';
 
 class Ticker extends Component {
-  componentDidMount() {
+  constructor(props) {
+    super(props);
+    this.updateNews = this.updateNews.bind(this);
+  }
+
+  updateNews() {
     const { dispatch } = this.props
     dispatch(newsFetch());
+  }
+
+  componentDidMount() {
+    this.updateNewsInterval = setInterval(this.updateNews, 1000*60*60);
+    this.updateNews();
+  }
+
+  componentWillUnmount() {
+    if(this.updateNewsInterval) clearInterval(this.updateNewsInterval);
   }
 
   render() {
