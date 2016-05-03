@@ -51,7 +51,7 @@ class BartWidget extends BaseWidget {
 }
 
 BartWidget.propTypes = Object.assign({
-  etd: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
+  etd: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   advisory: PropTypes.string,
   escalators: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
 }, BaseWidget.propTypes)
