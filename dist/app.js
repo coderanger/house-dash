@@ -28025,18 +28025,32 @@
 	var Ticker = function (_Component) {
 	  _inherits(Ticker, _Component);
 	
-	  function Ticker() {
+	  function Ticker(props) {
 	    _classCallCheck(this, Ticker);
 	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Ticker).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Ticker).call(this, props));
+	
+	    _this.updateNews = _this.updateNews.bind(_this);
+	    return _this;
 	  }
 	
 	  _createClass(Ticker, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
+	    key: 'updateNews',
+	    value: function updateNews() {
 	      var dispatch = this.props.dispatch;
 	
 	      dispatch((0, _actions.newsFetch)());
+	    }
+	  }, {
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      this.updateNewsInterval = setInterval(this.updateNews, 1000 * 60 * 60);
+	      this.updateNews();
+	    }
+	  }, {
+	    key: 'componentWillUnmount',
+	    value: function componentWillUnmount() {
+	      if (this.updateNewsInterval) clearInterval(this.updateNewsInterval);
 	    }
 	  }, {
 	    key: 'render',
