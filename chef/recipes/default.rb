@@ -15,8 +15,16 @@
 #
 
 application '/srv/house-dash' do
-  git 'https://github.com/coderanger/house-dash.git'
+  git 'https://github.com/coderanger/house-dash.git' do
+    branch 'release'
+  end
   javascript 'nodejs'
+  environment.update(
+    NODE_ENV: 'production',
+    BART_API_KEY: node['house-dash']['bart_api_key'],
+    FORECASTIO_API_KEY: node['house-dash']['forecastio_api_key'],
+    IMGUR_CLIENT_ID: node['house-dash']['imgur_client_id'],
+  )
   npm_install
   npm_start
 end
