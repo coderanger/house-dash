@@ -14,7 +14,7 @@ export function newsFetched(json) {
 export function newsFetch() {
   return (dispatch) => {
     dispatch({type: NEWS_FETCH});
-    fetch('/_api/news')
+    fetch('/_api/news', {cache: 'no-store'})
       .then(res => res.json())
       .then(json => dispatch(newsFetched(json)))
   };
@@ -47,7 +47,7 @@ export function bartFetched(json) {
 export function bartFetch() {
   return (dispatch) => {
     dispatch({type: BART_FETCH});
-    fetch('/_api/bart')
+    fetch('/_api/bart', {cache: 'no-store'})
       .then(res => res.json())
       .then(json => dispatch(bartFetched(json)))
   };
@@ -72,7 +72,7 @@ export function weatherFetched(location, json) {
 export function weatherFetch(location) {
   return (dispatch) => {
     dispatch({type: WEATHER_FETCH, location: location});
-    fetch('/_api/weather/'+location)
+    fetch('/_api/weather/'+location, {cache: 'no-store'})
       .then(res => res.json())
       .then(json => dispatch(weatherFetched(location, json)))
   };
@@ -97,7 +97,7 @@ export function gifFetched(json) {
 export function gifFetch() {
   return (dispatch) => {
     dispatch({type: GIF_FETCH});
-    fetch('/_api/gif')
+    fetch('/_api/gif', {cache: 'no-store'})
       .then(res => res.json())
       .then(json => dispatch(gifFetched(json)))
   };
