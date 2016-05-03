@@ -1,24 +1,30 @@
 import 'babel-polyfill';
 import 'isomorphic-fetch';
 import Express from 'express';
-import webpack from 'webpack';
-import webpackMiddleware from 'webpack-dev-middleware';
-import webpackHotMiddleware from 'webpack-hot-middleware';
 
+const isProd = process.env.NODE_ENV == 'production';
 const app = new Express();
 
-import webpackConfig from './webpack.config';
-const webpackCompiler = webpack(webpackConfig);
-app.use(webpackMiddleware(webpackCompiler, {
-  noInfo: true,
-  publicPath: webpackConfig.output.publicPath,
-}));
-if(process.env.NODE_ENV != 'prod') {
+if(isProd) {
+  console.log('Starting in production mode');
+  app.use('/assets', Express.static('dist'));
+} else {
+  console.log('Starting in development mode');
+  const webpack = require('webpack');
+  const webpackMiddleware = require('webpack-dev-middleware');
+  const webpackHotMiddleware = require('webpack-hot-middleware');
+  const webpackConfig = require('./webpack.config');
+
+  const webpackCompiler = webpack(webpackConfig);
+  app.use(webpackMiddleware(webpackCompiler, {
+    noInfo: true,
+    publicPath: webpackConfig.output.publicPath,
+  }));
   app.use(webpackHotMiddleware(webpackCompiler));
 }
 
 app.get('/', (req, res) => {
-  res.send('<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Document</title></head><body><div id="root"></div><script src="/assets/app.js"></script></body></html>');
+  res.send(`<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Document</title>${isProd ? '<link rel="stylesheet" href="/assets/app.css"></link>' : ''}</head><body><div id="root"></div><script src="/assets/app.js"></script></body></html>`);
 });
 
 import rssParser from 'rss-parser';

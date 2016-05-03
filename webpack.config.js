@@ -5,7 +5,12 @@ var isProd = process.env.NODE_ENV === 'production';
 
 module.exports = {
   context: __dirname + '/src',
-  entry: [
+  entry: isProd ? [
+    '../bower_components/normalize-css/normalize.css',
+    '../bower_components/font-awesome/scss/font-awesome.scss',
+    '../bower_components/weather-icons/sass/weather-icons.scss',
+    './index.js',
+  ] : [
     'webpack-hot-middleware/client',
     '../bower_components/normalize-css/normalize.css',
     '../bower_components/font-awesome/scss/font-awesome.scss',
@@ -51,9 +56,13 @@ module.exports = {
 
   devtool: '#source-map',
 
-  plugins: [
+  plugins: isProd ? [
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.NoErrorsPlugin(),
+    new ExtractTextPlugin('app.css'),
+  ] : [
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
-  ].concat(isProd ? [new ExtractTextPlugin('app.css')] : []),
+  ],
 }
