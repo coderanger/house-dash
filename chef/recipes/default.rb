@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 
-application '/srv/house-hash' do
+application '/srv/house-dash' do
   git 'https://github.com/coderanger/house-dash.git'
   javascript 'nodejs'
   npm_install
