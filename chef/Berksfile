@@ -15,5 +15,9 @@
 #
 
 source 'https://supermarket.chef.io'
+extension 'halite'
 
 metadata
+
+cookbook 'poise-javascript', gem: 'poise-javascript'
+cookbook 'poise-archive', gem: 'poise-archive'
