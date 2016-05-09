@@ -32,6 +32,7 @@ const MOON_ICONS = [
   'wi-moon-alt-waning-crescent-4',
   'wi-moon-alt-waning-crescent-5',
   'wi-moon-alt-waning-crescent-6',
+  'wi-moon-alt-new',
 ];
 
 class MoonWidget extends BaseWidget {
