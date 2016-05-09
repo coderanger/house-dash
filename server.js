@@ -90,7 +90,7 @@ app.get('/_api/gif', (req, res) => {
     })))
     .then(images => Array.prototype.concat.call(...images))
 
-  Promise.all([fetchFavs(0), fetchFavs(1), fetchFavs(2)])
+  Promise.all([fetchFavs(0), fetchFavs(1), fetchFavs(2), fetchFavs(3), fetchFavs(4), fetchFavs(5)])
     .then(images => res.send({images: Array.prototype.concat.call(...images)}))
     .catch(err => res.status(500).send(err.toString()));
 });
