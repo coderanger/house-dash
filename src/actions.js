@@ -7,7 +7,7 @@ export const NEWS_FETCHED = 'NEWS_FETCHED';
 export function newsFetched(json) {
   return {
     type: NEWS_FETCHED,
-    items: json.feed.entries.map(entry => entry.title).filter(title => !/^VIDEO:/.exec(title)),
+    items: json.feed.entries.map(entry => entry.title).filter(title => !/^(VIDEO|AUDIO):/.exec(title)),
   };
 }
 
