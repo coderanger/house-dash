@@ -19,5 +19,6 @@ extension 'halite'
 
 metadata
 
+cookbook 'application_javascript', gem: 'poise-application-javascript'
 cookbook 'poise-javascript', gem: 'poise-javascript'
 cookbook 'poise-archive', gem: 'poise-archive'
