@@ -36,7 +36,7 @@ class BartWidget extends BaseWidget {
     const { etd, advisory, escalators } = this.props;
     const styles = require('./style.scss');
     const now = moment();
-    const walkingMinutes = 8;
+    const walkingMinutes = 6;
     let etdMinutes = etd.map(e => moment(e).diff(now, 'minutes') - walkingMinutes).filter(e => e >= 0);
     let etdNext = etdMinutes.shift();
     return (
