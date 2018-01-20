@@ -18,6 +18,8 @@ raise "This is intended for Raspbian or other Debian-style distros" unless platf
 
 # Upgrade all the things!
 apt_update 'update'
+# except firefox
+execute 'apt-mark hold firefox'
 execute 'apt-get -y upgrade'
 
 # Install some utilities for our kiosk.
