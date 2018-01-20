@@ -45,7 +45,7 @@ application '/srv/homebridge' do
   end
 
   file '/etc/sudoers.d/homebridge' do
-    content "homebridge ALL = (root) NOPASSWD: /usr/bin/tvservice, /bin/fbset\nhomebridge ALL = (ubuntu) NOPASSWD: /usr/bin/xrefresh\n"
+    content "homebridge ALL = (root) NOPASSWD: /usr/bin/tvservice, /bin/fbset, /usr/bin/xrefresh\n"
   end
 
   file '.homebridge/config.json' do
@@ -62,7 +62,8 @@ application '/srv/homebridge' do
           switches: [
             {
               name: 'Dashboard',
-              on_cmd: 'sudo tvservice --preferred && sudo fbset -depth 8 && sudo fbset -depth 16 && sudo -u ubuntu -H xrefresh -display :0',
+              # on_cmd: 'sudo tvservice --preferred && sudo fbset -depth 8 && sudo fbset -depth 16 && sudo xrefresh -display :0',
+              on_cmd: 'sudo tvservice --preferred && sudo fbset -depth 32 && xset dpms force on -display :0 && xrefresh -display :0',
               off_cmd: 'sudo tvservice --off',
               state_cmd: 'sudo tvservice --status | grep progressive',
             },
