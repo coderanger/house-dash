@@ -51,9 +51,9 @@ app.get('/_api/bart', (req, res) => {
     }));
   }
   let calls = [
-    bartApiCall('http://api.bart.gov/api/etd.aspx?cmd=etd&orig=LAFY&dir=s&key='+process.env.BART_API_KEY),
-    bartApiCall('http://api.bart.gov/api/bsa.aspx?cmd=bsa&key='+process.env.BART_API_KEY),
-    fetch('http://www.bart.gov/bart/api/ets/status').then(r => r.json()),
+    bartApiCall('https://api.bart.gov/api/etd.aspx?cmd=etd&orig=LAFY&dir=s&key='+process.env.BART_API_KEY),
+    bartApiCall('https://api.bart.gov/api/bsa.aspx?cmd=bsa&key='+process.env.BART_API_KEY),
+    fetch('https://www.bart.gov/bart/api/escalator/status').then(r => r.json()),
   ];
   Promise.all(calls)
     .then(([etd, bsa, ets]) => res.send({etd: etd, bsa: bsa, ets: ets}))
